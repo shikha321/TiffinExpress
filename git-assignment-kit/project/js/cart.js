@@ -1,0 +1,11 @@
+function cartView(){
+const t=totals(),ids=Object.keys(S.cart);
+if(!ids.length)return`<div class="panel empty"><h2>Your cart is empty</h2><p>Add a few dishes from the menu to get started.</p><button class="btn" data-v="menu">Browse menu</button></div>`;
+return`<div class="two"><div><div class="panel"><h2>Your cart</h2>${ids.map(id=>{const m=MENU.find(x=>x.id==id);return`<div class="line"><span>${m.e} ${m.n}</span><span class="qty"><button data-d="-1" data-id="${id}" aria-label="Remove one">−</button>${S.cart[id]}<button data-d="1" data-id="${id}" aria-label="Add one">+</button></span><b>${R(m.p*S.cart[id])}</b></div>`}).join("")}
+<label for="cp">Coupon code (try SAVE10)</label><div class="row"><input id="cp" type="text" value="${esc(S.coupon)}"><button class="btn ghost" id="applycp">Apply</button></div></div>
+<div class="panel"><h2>Delivery details</h2><label for="nm">Full name</label><input id="nm" type="text" autocomplete="name" value="${esc(S.me?S.me.name:'')}"><label for="ph">Phone number</label><input id="ph" type="tel" autocomplete="tel" maxlength="10"><label for="ad">Delivery address</label><textarea id="ad" rows="3"></textarea>
+<label>Payment method</label><div class="pay">${["UPI","Card","Cash on delivery"].map(p=>`<label><input type="radio" name="pay" value="${p}" ${S.pay===p?"checked":""}> ${p}</label>`).join("")}</div></div></div>
+<div class="panel"><h2>Bill</h2><div class="line"><span>Subtotal</span><span>${R(t.sub)}</span></div>${t.disc?`<div class="line"><span>Coupon discount</span><span>−${R(t.disc)}</span></div>`:""}<div class="line"><span>Delivery fee</span><span>${t.fee?R(t.fee):"Free"}</span></div><div class="line"><span>GST (5%)</span><span>${R(t.gst)}</span></div>
+<div class="line tot"><span>Total</span><span>${R(t.total)}</span></div><div class="msg" id="err" role="alert"></div><button class="btn red" id="place" style="width:100%;padding:12px" ${S.placing?"disabled":""}>Place order · ${R(t.total)}</button></div></div>`}
+
+// Cart module verified by shikha321

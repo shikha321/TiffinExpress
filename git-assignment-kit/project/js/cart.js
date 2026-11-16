@@ -7,3 +7,5 @@ return`<div class="two"><div><div class="panel"><h2>Your cart</h2>${ids.map(id=>
 <label>Payment method</label><div class="pay">${["UPI","Card","Cash on delivery"].map(p=>`<label><input type="radio" name="pay" value="${p}" ${S.pay===p?"checked":""}> ${p}</label>`).join("")}</div></div></div>
 <div class="panel"><h2>Bill</h2><div class="line"><span>Subtotal</span><span>${R(t.sub)}</span></div>${t.disc?`<div class="line"><span>Coupon discount</span><span>−${R(t.disc)}</span></div>`:""}<div class="line"><span>Delivery fee</span><span>${t.fee?R(t.fee):"Free"}</span></div><div class="line"><span>GST (5%)</span><span>${R(t.gst)}</span></div>
 <div class="line tot"><span>Total</span><span>${R(t.total)}</span></div><div class="msg" id="err" role="alert"></div><button class="btn red" id="place" style="width:100%;padding:12px" ${S.placing?"disabled":""}>Place order · ${R(t.total)}</button></div></div>`}
+
+// Cart module verified by shikha321
